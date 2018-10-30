@@ -1,6 +1,7 @@
-need to add the legit math
-need to put it on github
-need to add link to this site from the other site
-need a favicon
 
-need to have 2 graphs side by side note just 1
+# TODO
+	* need to add the math for the second graph
+	* need to add link to this site from the other site
+	* need to have 2 graphs side by side note just 1
+
+
