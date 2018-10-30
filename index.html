@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="icon" href="help/icon.ico">
+
+  <!-- bootstrap imports -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <!-- my style -->
+  <link rel="stylesheet" href="index.css">
+
+  <title>Seizure Calculator</title>
+</head>
+<body>
+  <!-- js libraries (jquery, popper, bootstrap, plotly) -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.2.2/math.min.js"></script>
+
+<div class="container">
+  <h1>Seizure Calculator</h1>
+  <div id='input'>
+    <div class="form-group">
+      <label for="Age">Age</label>
+      <input type="number" class="form-control" id="Age" aria-describedby="Age" placeholder="30">
+    </div>
+    <div class="form-group">
+      <label for="RiskofMoreSZ">Risk of more seizures</label>
+      <input type="number" class="form-control" id="RiskofMoreSZ" aria-describedby="RiskofMoreSZ" placeholder="42">
+    </div>
+    <div class="form-group">
+      <label for="QOLwSZ">Quality of life with seizures</label>
+      <input type="number" class="form-control" id="QOLwSZ" aria-describedby="QOLwSZ" placeholder="42">
+    </div>
+    <div class="form-group">
+      <label for="MR">Mortality risk of seizures</label>
+      <input type="number" class="form-control" id="MR" aria-describedby="MR" placeholder="5.4">
+    </div>
+    <div class="form-group">
+      <label for="prOKAEDSZ">Risk of AED side affects</label>
+      <input type="number" class="form-control" id="prOKAEDSZ" aria-describedby="prOKAEDSZ" placeholder="42">
+    </div>
+    <div class="form-group">
+      <label for="QOLwAEDSEs">Quality of life with AED side afects</label>
+      <input type="number" class="form-control" id="QOLwAEDSEs" aria-describedby="QOLwAEDSEs" placeholder="42">
+    </div>
+    <div class="form-group">
+      <label for="baseCase">Base Case</label>
+      <input type="number" class="form-control" id="baseCase" aria-describedby="baseCase" placeholder="1">
+    </div>
+    <button onclick="runProcess()" class="btn btn-primary">Submit</button>
+    <br>
+    <br>
+  </div>
+  <div id="images">
+    <img src="markov.png" class='graphs'>
+    <div id='div1' class='graphs'></div>
+  </div>
+  <div id="output">
+    <h3 id="totalUtility">Total Utility</h3>
+    <h3>Utility for the other one</h3>
+    <h3>Which one is better</h3>
+  </div>
+</div>
+
+<!-- this is not the best way to load a json, but it works -->
+<script src="muASR.js"></script>
+<!-- my js code -->
+<script src="markov.js"></script> 
+
+</body>
+</html>
+

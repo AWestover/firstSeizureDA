@@ -1,0 +1,20 @@
+div#input {
+	width: 30%;
+	float: left;
+}
+div#output {
+	width: 30%;
+}
+
+div#images {
+	width: 60%;
+	float: right;
+}
+
+img.graphs {
+	width: 100%;
+}
+
+body {
+	background-color: #ededed;
+}
