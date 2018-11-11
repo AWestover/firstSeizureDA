@@ -7,7 +7,7 @@ div#output {
 }
 
 div#images {
-	width: 60%;
+	width: 70%;
 	float: right;
 }
 
@@ -15,6 +15,26 @@ img.graphs {
 	width: 100%;
 }
 
+div.graphs {
+	width: 50%;
+	margin-right: 0;
+	margin-left: 0;
+}
+
+div#graph1 {
+	float: left;
+}
+
+div#graph2 {
+	float: right;
+}
+
 body {
 	background-color: #ededed;
+}
+
+div.NOTcontainer {
+	margin: 0%;
+	margin-left: 1%;
+	padding: 0;
 }

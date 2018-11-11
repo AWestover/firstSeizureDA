@@ -23,7 +23,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.2.2/math.min.js"></script>
 
-<div class="container">
+<div class="NOTcontainer">
   <h1>Seizure Calculator</h1>
   <div id='input'>
     <div class="form-group">
@@ -60,20 +60,20 @@
   </div>
   <div id="images">
     <img src="markov.png" class='graphs'>
-    <div id='div1' class='graphs'></div>
+    <div id='graph1' class='graphs'></div>
+    <div id='graph2' class='graphs'></div>
   </div>
   <div id="output">
-    <h3 id="totalUtility">Total Utility</h3>
-    <h3>Utility for the other one</h3>
-    <h3>Which one is better</h3>
+    <h3 id="totalUtility1">Total Utility 1</h3>
+    <h3 id="totalUtility2">Total Utility 2</h3>
+    <h3 id="recommended">recommended</h3>
   </div>
 </div>
 
 <!-- this is not the best way to load a json, but it works -->
 <script src="muASR.js"></script>
 <!-- my js code -->
-<script src="markov.js"></script> 
+<script src="markov.js"></script>
 
 </body>
 </html>
-
