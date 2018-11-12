@@ -10,6 +10,8 @@ let baseCase = 1;
 
 function handleBaseCaseChoice(bc) {
 	baseCase = bc;
+	$("#Age").val(30);
+	$("#MR").val(5.4);
 	if (baseCase == 1 || baseCase == 2)
 	{
 		$("#pAE").val(0.22);
@@ -99,63 +101,64 @@ function calculateUtility(state, model) {
 	return utility;
 }
 
+function validate() {
+	let age = parseInt($("#Age").val());
+	let ageGood = (age && age > 5 && age < 101);
+	let MRv = parseFloat($("#MR").val());
+	let MRGood = (MRv && MRv < 10 && MRv > 1);
+	let pAE = parseFloat($("#pAE").val());
+	let pAEGood = (pAE!=null && pAE <= 1 && pAE >= 0);
+	let baseCaseGood = (baseCase == 1 || baseCase == 2 || baseCase == 3);
+	return (ageGood && MRGood && pAEGood && baseCaseGood);
+}
+
 function runProcess() {
-	let temp;
-
-	let age = 30;
-	temp = parseInt($("#Age").val());
-	if (temp) {
-		age = temp;
+	if(!validate())
+	{
+		alert("there is a problem with your input");
+		return false;
 	}
-	let MR = 5.4;
-	temp = parseFloat($("#MR").val());
-	if (temp) {
-		age = temp;
-	}
-	let pAE = 0.22;
-	temp = parseFloat($("#pAE").val());
-	if (temp) {
-		pAE = temp;
-	}
+	else {
+		let age = parseInt($("#Age").val());
+		let pt_data = {
+			"age": age,
+			"MR": parseFloat($("#MR").val()), // mortality risk of seizures
+			"pAE": parseFloat($("#pAE").val())
+		};
 
-	let pt_data = {
-		"age": age,
-		"MR": MR, // mortality risk of seizures
-		"pAE": pAE
-	};
-
-	let recRisk = [];
-	if (baseCase == 1) {
-		for (let i = 0; i < 500; i++) {
-			if (i-age < 0)
-				recRisk.push(1);
-			else if (i-age >= 0 && i-age < 2)
-				recRisk.push(21.9/100);
-			else if (i-age >= 2 && i-age < 5)
-				recRisk.push(7.04/100);
-			else if (i-age >= 5 && i-age < 8)
-				recRisk.push(0.68/100);
-			else
-				recRisk.push(0.01/100);
+		let recRisk = [];
+		if (baseCase == 1) {
+			for (let i = 0; i < 500; i++) {
+				if (i-age < 0)
+					recRisk.push(1);
+				else if (i-age >= 0 && i-age < 2)
+					recRisk.push(21.9/100);
+				else if (i-age >= 2 && i-age < 5)
+					recRisk.push(7.04/100);
+				else if (i-age >= 5 && i-age < 8)
+					recRisk.push(0.68/100);
+				else
+					recRisk.push(0.01/100);
+			}
+	  }
+		else { //baseCase ==2 | baseCase==3;
+			for (let i = 0; i < 500; i++) {
+				if (i-age < 0)
+					recRisk.push(1);
+				else if (i-age >= 0 && i-age < 2)
+					recRisk.push(65.7/100);
+				else if (i-age >= 2 && i-age < 5)
+					recRisk.push(21.12/100);
+				else if (i-age >= 5 && i-age < 8)
+					recRisk.push(4.08/100);
+				else
+					recRisk.push(0.03/100);
+			}
 		}
-  }
-	else { //baseCase ==2 | baseCase==3;
-		for (let i = 0; i < 500; i++) {
-			if (i-age < 0)
-				recRisk.push(1);
-			else if (i-age >= 0 && i-age < 2)
-				recRisk.push(65.7/100);
-			else if (i-age >= 2 && i-age < 5)
-				recRisk.push(21.12/100);
-			else if (i-age >= 5 && i-age < 8)
-				recRisk.push(4.08/100);
-			else
-				recRisk.push(0.03/100);
-		}
-	}
-	pt_data["recurrence_risk"] = recRisk;
+		pt_data["recurrence_risk"] = recRisk;
 
-	calculations(pt_data);
+		calculations(pt_data);
+	}
 }
 
 function calculations(pt_data) {
