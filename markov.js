@@ -210,7 +210,10 @@ function calculations(pt_data) {
 		}
 	}
 
-	let colors = ['#08519c','#3182bd','#6baed6','#bdd7e7','#eff3ff']
+	let colors = {
+		"model 1": ['#08519c','#3182bd','#6baed6','#bdd7e7','#eff3ff'],
+		"model 2": ['#08519c','#3182bd','#6baed6','#bdd7e7','#ffffff']
+	};
 	let data = {"model 1": [], "model 2": []};
 	for (let m in models)
 	{
@@ -220,7 +223,7 @@ function calculations(pt_data) {
 				y: curvesY[models[m]][i],
 				mode: 'none',
 				fill: 'tonexty',
-				fillcolor: colors[i],
+				fillcolor: colors[models[m]][i],
 				name: '#'+i
 			}
 			data[models[m]].push(cTrace);
