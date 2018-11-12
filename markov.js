@@ -2,7 +2,6 @@
 
 let models = ["model 1", "model 2"];
 // model parameters
-let pAE = 0.22; // risk of AED side affects
 let Efficacy = {
 	"model 1": 0.75,
 	"model 2": 1.00
@@ -66,9 +65,9 @@ function transition_matrix(pt_data, t, model) {
 
 		out = math.matrix([
 			[a11,0  ,0  ,0  ,0  ],
-			[a21*(1-pAE),a22,0  ,0  ,0  ],
+			[a21*(1-pt_data.pAE),a22,0  ,0  ,0  ],
 			[0  ,0  ,a33,0  ,0  ],
-			[a21*pAE  ,0  ,a43,a44,0  ],
+			[a21*pt_data.pAE  ,0  ,a43,a44,0  ],
 			[d1 ,d2 ,d3 ,d4 ,1  ]
 		]);
 	}
@@ -101,10 +100,16 @@ function runProcess() {
 	if (temp) {
 		age = temp;
 	}
+	let pAE = 0.22;
+	temp = parseInt($("#pAE").val());
+	if (temp) {
+		pAE = temp;
+	}
 
 	let pt_data = {
 		"age": age,
-		"MR": MR // mortality risk of seizures
+		"MR": MR, // mortality risk of seizures
+		"pAE": pAE
 	};
 
 	let baseCase = 1;
@@ -144,12 +149,17 @@ function runProcess() {
 	}
 	pt_data["recurrence_risk"] = recRisk;
 
+	if(baseCase == 3)
+	{
+		pt_data["pAE"] = 0.8;
+	}
+
 	calculations(pt_data);
 }
 
 function calculations(pt_data) {
 	let x = { // initial probabilities
-		"model 1": [1-pAE,0,pAE,0,0],
+		"model 1": [1-pt_data.pAE,0,pt_data.pAE,0,0],
 		"model 2":[1,0,0,0,0]
 	};
 	let probabilities = {
