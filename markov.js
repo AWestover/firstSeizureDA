@@ -101,24 +101,42 @@ function calculateUtility(state, model) {
 	return utility;
 }
 
-function validate() {
+
+function validateAge() {
 	let age = parseInt($("#Age").val());
-	let ageGood = (age && age > 5 && age < 101);
+	return (age && age > 5 && age < 101);
+}
+function validateMR() {
 	let MRv = parseFloat($("#MR").val());
-	let MRGood = (MRv && MRv < 10 && MRv > 1);
+	return (MRv && MRv < 10 && MRv > 1);
+}
+function validatePAE() {
 	let pAE = parseFloat($("#pAE").val());
-	let pAEGood = (pAE!=null && pAE <= 1 && pAE >= 0);
-	let baseCaseGood = (baseCase == 1 || baseCase == 2 || baseCase == 3);
-	return (ageGood && MRGood && pAEGood && baseCaseGood);
+	return (pAE!=null && pAE <= 1 && pAE >= 0);
+}
+function validateBaseCase() {
+	return (baseCase == 1 || baseCase == 2 || baseCase == 3);
 }
 
 function runProcess() {
-	if(!validate())
+	if(!validateAge())
 	{
-		alert("there is a problem with your input");
+		$.notify("invalid age", 'error');
 		return false;
 	}
+	else if (!validateMR())
+	{
+		$.notify("invalid mortality rate", 'error');
+	}
+	else if (!validatePAE) {
+		$.notify("invalid probability of adverse side affects", 'error');
+	}
+	else if (!validateBaseCase)
+	{
+		$.notify("invalid base case", 'error');
+	}
 	else {
+		$.notify("processed data", 'success');
 		let age = parseInt($("#Age").val());
 		let pt_data = {
 			"age": age,
