@@ -77,8 +77,8 @@ function transition_matrix(pt_data, t, model) {
 
 function calculateUtility(state, model) {
 	let weights = {
-		"model 1": [0.967, 0.757, 0.8647, 0.6757, 0],
-		"model 2": [1, 0.757, 0.8647, 0.6757, 0]
+		"model 1": [0.96, 0.75, 0.864, 0.675, 0],
+		"model 2": [1, 0.75, 0.864, 0.675, 0]
 	}
 	let utility = 0;
 	for (let i = 0; i < state.length; i++)
