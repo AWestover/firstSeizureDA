@@ -8,6 +8,20 @@ let Efficacy = {
 };
 let baseCase = 1;
 
+function handleBaseCaseChoice(bc) {
+	console.log(bc);
+	// temp = parseInt($("input[name='baseCase']:checked").val());
+	baseCase = bc;
+	if (baseCase == 1 || baseCase == 2)
+	{
+		$("#pAE").val(0.22);
+	}
+	if(baseCase == 3)
+	{
+		$("#pAE").val(0.8);
+	}
+}
+
 // must input base case for recurrence risks
 function transition_matrix(pt_data, t, model) {
 	let year = t+pt_data.age;
@@ -64,11 +78,11 @@ function transition_matrix(pt_data, t, model) {
 		let a44 = 1-d4;
 
 		out = math.matrix([
-			[a11,0  ,0  ,0  ,0  ],
-			[a21*(1-pt_data.pAE),a22,0  ,0  ,0  ],
-			[0  ,0  ,a33,0  ,0  ],
-			[a21*pt_data.pAE  ,0  ,a43,a44,0  ],
-			[d1 ,d2 ,d3 ,d4 ,1  ]
+			[a11,0,0,0,0],
+			[a21*(1-pt_data.pAE),a22,0,0,0],
+			[0,0,a33,0,0],
+			[a21*pt_data.pAE,0,a43,a44,0],
+			[d1,d2,d3,d4,1]
 		]);
 	}
 	return (out);
@@ -112,12 +126,6 @@ function runProcess() {
 		"pAE": pAE
 	};
 
-	let baseCase = 1;
-	temp = parseInt($("#baseCase").val());
-	if (temp && (temp == 1 || temp == 2 || temp == 3)) {
-		baseCase = temp;
-	}
-
 	let recRisk = [];
 	if (baseCase == 1) {
 		for (let i = 0; i < 500; i++) {
@@ -132,9 +140,9 @@ function runProcess() {
 			else
 				recRisk.push(0.01/100);
 		}
-    }
+  }
 	else { //baseCase ==2 | baseCase==3;
-	    for (let i = 0; i < 500; i++) {
+		for (let i = 0; i < 500; i++) {
 			if (i-age < 0)
 				recRisk.push(1);
 			else if (i-age >= 0 && i-age < 2)
@@ -148,11 +156,6 @@ function runProcess() {
 		}
 	}
 	pt_data["recurrence_risk"] = recRisk;
-
-	if(baseCase == 3)
-	{
-		pt_data["pAE"] = 0.8;
-	}
 
 	calculations(pt_data);
 }
