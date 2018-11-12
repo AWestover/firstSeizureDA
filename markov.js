@@ -9,8 +9,6 @@ let Efficacy = {
 let baseCase = 1;
 
 function handleBaseCaseChoice(bc) {
-	console.log(bc);
-	// temp = parseInt($("input[name='baseCase']:checked").val());
 	baseCase = bc;
 	if (baseCase == 1 || baseCase == 2)
 	{
@@ -110,12 +108,12 @@ function runProcess() {
 		age = temp;
 	}
 	let MR = 5.4;
-	temp = parseInt($("#MR").val());
+	temp = parseFloat($("#MR").val());
 	if (temp) {
 		age = temp;
 	}
 	let pAE = 0.22;
-	temp = parseInt($("#pAE").val());
+	temp = parseFloat($("#pAE").val());
 	if (temp) {
 		pAE = temp;
 	}
@@ -161,6 +159,7 @@ function runProcess() {
 }
 
 function calculations(pt_data) {
+	console.log(pt_data.pAE);
 	let x = { // initial probabilities
 		"model 1": [1-pt_data.pAE,0,pt_data.pAE,0,0],
 		"model 2":[1,0,0,0,0]
